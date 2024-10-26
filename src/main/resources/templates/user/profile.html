@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-th-replace="~{base :: parent(~{::#content},~{::title}, ~{::script})}">
+
+<head>
+    <title>My Profile</title>
+</head>
+
+<body>
+    <div id="content">
+        <!-- sidebar -->
+        <!-- <div th:if="${loggedInUser}">
+            <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+        </div> -->
+        <div class="pt-16 md:grid md:grid-cols-4 gap-8">
+            <div th:if="${loggedInUser}">
+                <aside id="logo-sidebar" class="hidden md:block" aria-label="Sidebar">
+                    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <div class="flex items-center flex-col ps-2.5 justify-center">
+                            <img onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/a/ACg8ocK65CnQS2UEyG0qbEC0BYBaxm9rSPbCXJGlOwtgHfQXuTP27AUm=s96-c'"
+                                data-th-src="@{${loggedInUser.profilePicLink}}"
+                                class="h-14 me-3 sm:h-14 rounded-full" />
+                            <p class="ps-2.5">
+                                <span
+                                    class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Welcome
+                                    to
+                                    SCM</span>
+                            <p id="current-date" class="text-xs mb-3 text-center">Novermber 12, 2024</p>
+                            <p />
+                        </div>
+                        <ul class="space-y-2 font-medium">
+                            <li>
+                                <a data-th-href="@{'/user/dashboard'}"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 22 21">
+                                        <path
+                                            d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                                        <path
+                                            d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                                    </svg>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
+                                    <span
+                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-th-href="@{'/user/my-profile'}"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <i class="fa-solid fa-user h-5 w-5"></i>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">My Profile</span>
+                                    <span
+                                        class="inline-flex items-center justify-center px-2 py-[1.5px] ms-3 text-sm font-medium text-white bg-green-700 rounded-full dark:bg-gray-700 dark:text-gray-300">Manage</span></a>
+                            </li>
+                            <li>
+                                <a data-th-href="@{'/user/contacts/add'}"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <i class="fa-solid fa-plus w-5 h-5"></i>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Add Contact</span></a>
+                            </li>
+                            <li>
+                                <a data-th-href="@{'/user/contacts'}"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <i class="fa-solid fa-address-book w-5 h-5"></i>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">All Contacts</span>
+                                </a>
+                            </li>
+                            <li>
+                                <button onclick="openFeedbackModal()" type="button"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <i class="fa-solid fa-comment"></i>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Feedback</span>
+                                </button>
+                            </li>
+                            <li>
+                                <a data-th-href="@{'/logout'}"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 18 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                                    </svg>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-span-3">
+                <!-- profile  -->
+                <div data-th-object="${loggedInUser}" class="mx-auto items-center justify-center">
+                    <div class="flex items-center justify-center min-h-screen">
+                        <div class="my-10 w-full max-w-md text-center">
+                            <div class="rounded-lg bg-white px-4 pt-8 pb-10 dark:bg-gray-900">
+                                <div class="relative mx-auto w-36 rounded-full">
+                                    <span
+                                        class="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"
+                                        title="Active Member"></span>
+                                    <img data-th-src="*{profilePicLink}" class="mx-auto h-auto w-full rounded-full"
+                                        onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/a/ACg8ocK65CnQS2UEyG0qbEC0BYBaxm9rSPbCXJGlOwtgHfQXuTP27AUm=s96-c'" />
+                                </div>
+                                <div class="my-2 py-4">
+                                    <h1 data-th-text="*{name}"
+                                        class="text-center text-xl font-bold text-gray-900 dark:text-gray-300">
+                                    </h1>
+                                    <h3 data-th-text="*{email}"
+                                        class="text-sm font-lg text-center leading-6 text-gray-600">
+                                    </h3>
+                                </div>
+                                <p data-th-text="*{about}"
+                                    class="text-center text-sm leading-6 text-gray-500 hover:text-gray-600">
+                                </p>
+                                <ul
+                                    class="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Gender</span>
+                                        <span data-th-if="${loggedInUser.gender}" class="ml-auto"
+                                            data-th-text="*{gender}"></span>
+                                        <span data-th-unless="${loggedInUser.gender}" class="ml-auto text-xs">Not
+                                            Available</span>
+                                    </li>
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Account Status</span>
+                                        <span class="ml-auto"><span
+                                                class="rounded-full bg-green-200 py-1 px-2 text-xs font-medium text-green-700">Enabled</span></span>
+                                    </li>
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Joined On</span>
+                                        <span data-th-if="${loggedInUser.joinedOn}" class="ml-auto"
+                                            data-th-text="*{joinedOn}"></span>
+                                        <span data-th-unless="${loggedInUser.joinedOn}" class="ml-auto text-xs">Not
+                                            Available</span>
+                                    </li>
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Phone Number</span>
+                                        <span data-th-if="${loggedInUser.phoneNumber}" class="ml-auto"
+                                            data-th-text="*{phoneNumber}"></span>
+                                        <span data-th-unless="${loggedInUser.phoneNumber}" class="ml-auto text-xs">Not
+                                            Available</span>
+                                    </li>
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Phone Verified <i data-th-if="${loggedInUser.phoneVerified}"
+                                                class="fa-solid fa-circle-check text-green-600"></i></span>
+                                        <span class="ml-auto uppercase"
+                                            data-th-classappend="${loggedInUser.phoneVerified}? 'text-green-700' : 'text-red-700'"
+                                            data-th-text="*{phoneVerified}"></span>
+                                    </li>
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Email Verified <i data-th-if="${loggedInUser.emailVerified}"
+                                                class="fa-solid fa-circle-check text-green-600"></i></span>
+                                        <span class="ml-auto uppercase"
+                                            data-th-classappend="${loggedInUser.emailVerified}? 'text-green-600' : 'text-red-700'"
+                                            data-th-text="*{emailVerified}"></span>
+                                    </li>
+                                    <li class="flex items-center py-3 text-sm">
+                                        <span>Account created using</span>
+                                        <span class="ml-auto capitalize" data-th-text="*{provider}"></span>
+                                    </li>
+                                    <li class="flex items-center justify-between py-3 text-sm">
+                                        <span>Roles Granted</span>
+                                        <div>
+                                            <span data-th-each="role : ${loggedInUser.roleList}">
+                                                <span
+                                                    class="px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-lg"
+                                                    data-th-classappend="${role == 'ROLE_ADMIN'} ? 'px-2 py-1 bg-yellow-500 hover:bg-yellow-700 text-white text-xs font-semibold rounded-lg'"
+                                                    data-th-text=" ${role}"></span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div data-th-replace="~{/user/feedback :: feedback}"></div>
+            </div>
+
+        </div>
+        <script></script>
+        <script data-th-src="@{'/js/feedback.js'}"></script>
+</body>
+
+</html>
