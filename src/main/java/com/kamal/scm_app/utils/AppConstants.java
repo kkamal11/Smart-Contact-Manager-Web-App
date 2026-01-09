@@ -9,7 +9,7 @@ public final class AppConstants {
     @Value("${server.port}")
     public static String APP_PORT;
 
-    public static final String APP_ADMIN_EMAIL = "dev.kamal.kishor@gmail.com";
+    public static final String APP_ADMIN_EMAIL = "example.email.kishor@gmail.com";
 
     public static final String APP_BASE_URL = "http://localhost:8080/";
 
@@ -41,3 +41,4 @@ public final class AppConstants {
             "<br /><br /><br /><br />With regards,<br />" +
             "<p color='blue'>Kamal Kishor</p>";
 }
+
